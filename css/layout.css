@@ -7,6 +7,24 @@
   flex-wrap: wrap;
 }
 
-.column-one-third {
-  flex-basis: calc(100% / 3);
+@media screen and (width > 374px) {
+  .title-row {
+    font-size: 50px;
+  }
+}
+
+@media screen and (width > 575px) {
+  .title-row {
+    font-size: 50px;
+  }
+
+  .column-one-third {
+    flex-basis: 50%;
+  }
+}
+
+@media screen and (width > 767px) {
+  .column-one-third {
+    flex-basis: calc(100% / 3);
+  }
 }

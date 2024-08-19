@@ -35,13 +35,11 @@ function renderMonster(object: Monster): HTMLDivElement {
         <div class="monster-name">
       </div>
       </div>
-    This times 3
   */
 
   object.name = object.name.replace(' ', '-');
   object.name = object.name.replace("'", '-');
 
-  // Starting Dom Creation
   const $oneThird = document.createElement('div');
   $oneThird.className = 'column-one-third';
 

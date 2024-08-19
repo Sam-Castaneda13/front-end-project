@@ -11,18 +11,26 @@
     <link rel="stylesheet" href="css/reset.css" />
     <link rel="stylesheet" href="css/layout.css" />
     <link rel="stylesheet" href="css/styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
   </head>
   <body>
     <header>
       <div class="row-head">
         <h1 class="selected">Monsters</h1>
-        <h2 class="not-selected">Filter</h2>
-        <h2 class="not-selected">Favorites</h2>
-        <h2 class="not-selected">Random</h2>
+        <h2 class="not-selected"><i class="fa-solid fa-star"></i></h2>
+        <h2 class="not-selected"><i class="fa-solid fa-dice"></i></h2>
       </div>
     </header>
     <main>
       <div class="container">
+        <div class="title-row">
+          <div class="title">Monsters</div>
+        </div>
+        <div class="filter">
+          <i class="fa-solid fa-filter" id="filter"></i>
+        </div>
         <div class="row"></div>
       </div>
     </main>

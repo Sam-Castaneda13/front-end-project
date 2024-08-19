@@ -1,11 +1,23 @@
 header {
   background-color: black;
-  width: 100%;
   font-family: 'Monster Hunter', sans-serif;
 }
 
 .container {
   background-color: gray;
+}
+
+.title-row {
+  text-align: center;
+  font-family: 'Monster Hunter', sans-serif;
+  color: #94ca76;
+}
+
+.filter {
+  text-align: right;
+  font-size: xx-large;
+  margin-right: 30px;
+  color: black;
 }
 
 .row-head {
