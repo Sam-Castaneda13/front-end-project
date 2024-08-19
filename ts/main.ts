@@ -11,7 +11,7 @@ const $row = document.querySelector('.row');
 
 async function makeMonsters(): Promise<void> {
   if (!$row) throw new Error('Could not load row');
-  for (let i = 1; i < 6; i++) {
+  for (let i = 1; i < 59; i++) {
     try {
       const response = await fetch(`https://mhw-db.com/monsters/${i}`);
       if (!response.ok) {
@@ -38,9 +38,15 @@ function renderMonster(object: Monster): HTMLDivElement {
     This times 3
   */
 
+  object.name = object.name.replace(' ', '-');
+  object.name = object.name.replace("'", '-');
+
   // Starting Dom Creation
   const $oneThird = document.createElement('div');
   $oneThird.className = 'column-one-third';
+
+  const $monsterList = document.createElement('div');
+  $monsterList.className = 'monster-card';
 
   const $monImg = document.createElement('img');
   $monImg.className = 'monster-img';
@@ -48,9 +54,13 @@ function renderMonster(object: Monster): HTMLDivElement {
 
   const $monName = document.createElement('div');
   $monName.className = 'monster-name';
-  $monName.textContent = object.name;
 
-  $oneThird.append($monImg);
-  $oneThird.append($monName);
+  const $monsterName = document.createElement('h2');
+  $monsterName.textContent = object.name;
+
+  $oneThird.append($monsterList);
+  $monsterList.append($monImg);
+  $monsterList.append($monName);
+  $monName.append($monsterName);
   return $oneThird;
 }
