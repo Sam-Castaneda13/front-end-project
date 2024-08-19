@@ -3,6 +3,16 @@ header {
   font-family: 'Monster Hunter', sans-serif;
 }
 
+.row {
+  color: white;
+  flex-basis: calc(90% / 3);
+}
+
+i {
+  margin-top: 20px;
+  font-size: 30px;
+}
+
 .container {
   background-color: gray;
 }
@@ -18,22 +28,6 @@ header {
   font-size: xx-large;
   margin-right: 30px;
   color: black;
-}
-
-.row-head {
-  color: white;
-}
-
-.row-head h1 {
-  margin-left: 15px;
-  margin-right: 2px;
-  margin-top: 30px;
-}
-
-.row-head h2 {
-  margin-left: 75px;
-  margin-right: 2px;
-  margin-top: 35px;
 }
 
 .monster-name {

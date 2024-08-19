@@ -7,24 +7,21 @@ interface Monster {
   locations: [];
 }
 
-const $row = document.querySelector('.row');
+const $row = document.querySelector('.monster-line');
 
 async function makeMonsters(): Promise<void> {
   if (!$row) throw new Error('Could not load row');
-  for (let i = 1; i < 59; i++) {
-    try {
-      const response = await fetch(`https://mhw-db.com/monsters/${i}`);
-      if (!response.ok) {
-        throw new Error('This is not ok');
-      }
-      const monster = (await response.json()) as Monster;
-      console.log(monster);
-      const newPage = renderMonster(monster);
-      $row.append(newPage);
-    } catch (error) {
-      console.log('Error:', error);
+  try {
+    const response = await fetch(`https://mhw-db.com/monsters`);
+    if (!response.ok) {
+      throw new Error('This is not ok');
     }
-  }
+    const monster = await response.json();
+    for (let i = 0; monster.length + 1; i++) {
+      const newPage = renderMonster(monster[i]);
+      $row.append(newPage);
+    }
+  } catch (error) {}
 }
 makeMonsters();
 
@@ -34,11 +31,15 @@ function renderMonster(object: Monster): HTMLDivElement {
         <img src='link' class="monster-img"/>
         <div class="monster-name">
       </div>
-      </div>
   */
 
-  object.name = object.name.replace(' ', '-');
-  object.name = object.name.replace("'", '-');
+  let imageUrl = object.name;
+  if (object.name.includes(' ')) {
+    imageUrl = object.name.replace(' ', '-');
+  }
+  if (object.name.includes("'")) {
+    imageUrl = object.name.replace("'", '-');
+  }
 
   const $oneThird = document.createElement('div');
   $oneThird.className = 'column-one-third';
@@ -48,7 +49,7 @@ function renderMonster(object: Monster): HTMLDivElement {
 
   const $monImg = document.createElement('img');
   $monImg.className = 'monster-img';
-  $monImg.setAttribute('src', `images/icons/${object.name}.webp`);
+  $monImg.setAttribute('src', `images/icons/${imageUrl}.webp`);
 
   const $monName = document.createElement('div');
   $monName.className = 'monster-name';

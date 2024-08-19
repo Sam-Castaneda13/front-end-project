@@ -16,11 +16,15 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
   </head>
   <body>
-    <header>
-      <div class="row-head">
+    <header class="header justify-between">
+      <div class="row">
         <h1 class="selected">Monsters</h1>
-        <h2 class="not-selected"><i class="fa-solid fa-star"></i></h2>
-        <h2 class="not-selected"><i class="fa-solid fa-dice"></i></h2>
+      </div>
+      <div class="row">
+        <i class="fa-solid fa-star star not-selected"></i>
+      </div>
+      <div class="row">
+        <i class="fa-solid fa-dice dice not-selected"></i>
       </div>
     </header>
     <main>
@@ -31,7 +35,7 @@
         <div class="filter">
           <i class="fa-solid fa-filter" id="filter"></i>
         </div>
-        <div class="row"></div>
+        <div class="monster-line"></div>
       </div>
     </main>
     <script src="js/data.js"></script>

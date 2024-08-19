@@ -1,8 +1,9 @@
-.row-head {
+.header {
   display: flex;
+  flex-wrap: nowrap;
 }
 
-.row {
+.monster-line {
   display: flex;
   flex-wrap: wrap;
 }
