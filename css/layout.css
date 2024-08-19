@@ -1,3 +1,12 @@
+.row-head {
+  display: flex;
+}
+
 .row {
   display: flex;
+  flex-wrap: wrap;
+}
+
+.column-one-third {
+  flex-basis: calc(100% / 3);
 }
