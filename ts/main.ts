@@ -14,11 +14,10 @@ async function makeMonsters(): Promise<void> {
   try {
     const response = await fetch(`https://mhw-db.com/monsters`);
     if (!response.ok) {
-      throw new Error('This is not ok');
+      throw new Error('Monster fetch query failed');
     }
     const monster = await response.json();
-    for (let i = 0; monster.length + 1; i++) {
-      console.log(monster[i]);
+    for (let i = 0; monster.length; i++) {
       const newPage = renderMonster(monster[i]);
       $row.append(newPage);
     }
