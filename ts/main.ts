@@ -18,6 +18,7 @@ async function makeMonsters(): Promise<void> {
     }
     const monster = await response.json();
     for (let i = 0; monster.length + 1; i++) {
+      console.log(monster[i]);
       const newPage = renderMonster(monster[i]);
       $row.append(newPage);
     }
