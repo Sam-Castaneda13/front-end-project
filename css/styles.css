@@ -5,7 +5,6 @@ header {
 
 .row {
   color: white;
-  flex-basis: calc(90% / 3);
 }
 
 i {
