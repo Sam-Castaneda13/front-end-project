@@ -1,20 +1,42 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AJAX Project</title>
-  <link rel="icon" href="images/favicon.ico">
-  <link rel="stylesheet" href="css/reset.css">
-  <link rel="stylesheet" href="css/layout.css">
-  <link rel="stylesheet" href="css/styles.css">
-</head>
-<body>
-  <header>
-  </header>
-  <main>
-  </main>
-  <script src="js/data.js"></script>
-  <script src="js/main.js"></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AJAX Project</title>
+    <link
+      href="https://fonts.cdnfonts.com/css/monster-hunter"
+      rel="stylesheet" />
+    <link rel="icon" href="images/favicon.ico" />
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/layout.css" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+  </head>
+  <body>
+    <header class="header justify-between">
+      <div class="row">
+        <h1 class="selected">Monsters</h1>
+      </div>
+      <div class="row">
+        <i class="fa-solid fa-star star not-selected"></i>
+        <i class="fa-solid fa-dice dice not-selected"></i>
+      </div>
+    </header>
+    <main>
+      <div class="container">
+        <div class="title-row">
+          <div class="title">Monsters</div>
+        </div>
+        <div class="filter">
+          <i class="fa-solid fa-filter" id="filter"></i>
+        </div>
+        <div class="monster-line"></div>
+      </div>
+    </main>
+    <script src="js/data.js"></script>
+    <script src="js/main.js"></script>
+  </body>
 </html>

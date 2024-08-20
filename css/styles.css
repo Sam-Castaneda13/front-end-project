@@ -1,0 +1,51 @@
+header {
+  background-color: black;
+  font-family: 'Monster Hunter', sans-serif;
+}
+
+.row {
+  color: white;
+}
+
+i {
+  margin-top: 20px;
+  font-size: 30px;
+}
+
+.container {
+  background-color: gray;
+}
+
+.title-row {
+  text-align: center;
+  font-family: 'Monster Hunter', sans-serif;
+  color: #94ca76;
+}
+
+.filter {
+  text-align: right;
+  font-size: xx-large;
+  margin-right: 30px;
+  color: black;
+}
+
+.monster-name {
+  text-align: center;
+  font-family: 'Monster Hunter', sans-serif;
+  padding: 1rem;
+}
+
+.monster-name h2 {
+  margin-top: 0;
+  font-size: xx-large;
+  color: #94ca76;
+}
+
+.monster-card > img {
+  width: 100%;
+  background-color: gray;
+}
+
+.selected {
+  color: yellow;
+}
