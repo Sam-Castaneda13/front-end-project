@@ -1,3 +1,18 @@
+.container {
+  background-color: grey;
+  font-family: 'Monster Hunter', sans-serif;
+}
+
+.monster-select {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.detail-img {
+  flex-basis: 100%;
+}
+
 .header {
   display: flex;
   flex-wrap: nowrap;
@@ -5,14 +20,22 @@
   justify-content: space-between;
 }
 
-.monster-line {
+#monster-line {
   display: flex;
   flex-wrap: wrap;
+}
+
+.padding-left-25 {
+  padding-left: 25px;
 }
 
 @media screen and (width > 374px) {
   .title-row {
     font-size: 50px;
+  }
+
+  .mon-img {
+    margin-left: 50px;
   }
 }
 
@@ -24,10 +47,18 @@
   .column-one-third {
     flex-basis: 50%;
   }
+
+  .mon-img {
+    margin-left: 50px;
+  }
 }
 
 @media screen and (width > 767px) {
   .column-one-third {
     flex-basis: calc(100% / 3);
+  }
+
+  .mon-img {
+    margin-left: 125px;
   }
 }
