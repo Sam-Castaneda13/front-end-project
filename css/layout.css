@@ -1,6 +1,7 @@
 .container {
   background-color: grey;
   font-family: 'Monster Hunter', sans-serif;
+  height: 600px;
 }
 
 .monster-select {
@@ -25,6 +26,10 @@
   flex-wrap: wrap;
 }
 
+#monster-select {
+  display: flex;
+}
+
 .padding-left-25 {
   padding-left: 25px;
 }
@@ -32,10 +37,6 @@
 @media screen and (width > 374px) {
   .title-row {
     font-size: 50px;
-  }
-
-  .mon-img {
-    margin-left: 50px;
   }
 }
 
@@ -47,18 +48,10 @@
   .column-one-third {
     flex-basis: 50%;
   }
-
-  .mon-img {
-    margin-left: 50px;
-  }
 }
 
 @media screen and (width > 767px) {
   .column-one-third {
     flex-basis: calc(100% / 3);
-  }
-
-  .mon-img {
-    margin-left: 125px;
   }
 }
