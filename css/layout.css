@@ -1,17 +1,6 @@
 .container {
-  background-color: grey;
   font-family: 'Monster Hunter', sans-serif;
   height: 600px;
-}
-
-.monster-select {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.detail-img {
-  flex-basis: 100%;
 }
 
 .header {
@@ -21,13 +10,17 @@
   justify-content: space-between;
 }
 
-#monster-line {
+.row {
   display: flex;
   flex-wrap: wrap;
 }
 
-#monster-select {
-  display: flex;
+.row #monster-line {
+  display: contents;
+}
+
+.column-half {
+  flex-basis: 50%;
 }
 
 .padding-left-25 {

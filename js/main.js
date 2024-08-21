@@ -42,8 +42,6 @@ function renderMonster(object) {
   if (object.name.includes("'")) {
     imageUrl = object.name.replace("'", '-');
   }
-  // const $oneThird = document.createElement('div');
-  // $oneThird.className = 'column-one-third';
   const $monsterList = document.createElement('div');
   $monsterList.className = 'monster-card column-one-third';
   $monsterList.setAttribute('id', 'green');
@@ -57,7 +55,6 @@ function renderMonster(object) {
   const $monsterName = document.createElement('a');
   $monsterName.textContent = object.name;
   $monsterName.setAttribute('name', 'plzwork');
-  // $oneThird.appendChild($monsterList);
   $monsterList.appendChild($monImg);
   $monsterList.appendChild($monName);
   $monName.appendChild($monsterName);
@@ -75,9 +72,9 @@ async function monsterDetails(event) {
   if (!$monLine) throw new Error('Could not load Line');
   if (!$monSelect) throw new Error('Could not load Select');
   if (!$eventTarget.closest('.monster-card')) return;
-  const monsterId = $eventTarget
-    .closest('.monster-card')
-    ?.getAttribute('data-monster-id');
+  const $monsterCard = $eventTarget.closest('.monster-card');
+  if (!$monsterCard) return;
+  const monsterId = $monsterCard.getAttribute('data-monster-id');
   try {
     const response = await fetch(`https://mhw-db.com/monsters/${monsterId}`);
     if (!response.ok) {
@@ -91,17 +88,17 @@ async function monsterDetails(event) {
     $monType.textContent = $monDet.type;
     $monSpecies.textContent = $monDet.species;
     const trys = $monDet.locations;
-    let huh = '';
+    let monsterLoc = '';
     for (let i = 0; i < trys.length; i++) {
       if (i < trys.length - 1) {
-        huh += `${trys[i].name}, `;
+        monsterLoc += `${trys[i].name}, `;
       } else {
-        huh += `${trys[i].name} `;
+        monsterLoc += `${trys[i].name} `;
       }
     }
-    $monLocations.textContent = huh;
-    $monLine.setAttribute('class', 'hidden');
-    $monSelect.setAttribute('class', 'unhidden');
+    $monLocations.textContent = monsterLoc;
+    $monLine.classList.add('hidden');
+    $monSelect.classList.remove('hidden');
   } catch (error) {}
 }
 function imgChanger(object) {
@@ -116,6 +113,6 @@ function imgChanger(object) {
 }
 if (!$monsterPage) throw new Error('Could not load Monster Page');
 $monsterPage.addEventListener('click', function () {
-  $monLine.setAttribute('class', 'unhidden');
-  $monSelect.setAttribute('class', 'hidden');
+  $monLine.classList.remove('hidden');
+  $monSelect.classList.add('hidden');
 });
