@@ -103,3 +103,7 @@ a {
 .monster-card {
   background-color: grey;
 }
+
+.favorite {
+  color: yellow;
+}
