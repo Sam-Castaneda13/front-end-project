@@ -34,6 +34,13 @@ header i {
   color: black;
 }
 
+.star-favorite {
+  text-align: right;
+  font-size: xx-large;
+  margin-right: 30px;
+  color: black;
+}
+
 .monster-name {
   text-align: center;
   font-family: 'Monster Hunter', sans-serif;

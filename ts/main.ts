@@ -21,8 +21,13 @@ const $monLocations = document.querySelector('.mon-locations-in');
 const $monLine = document.querySelector('#monster-line');
 const $monSelect = document.querySelector('#monster-select');
 const $monsterPage = document.querySelector('#monsters-tab');
+const $filter = document.querySelector('.filter');
+const $star = document.querySelector('.star-favorite');
 if (!$monLine) throw new Error('Could not load Line');
 if (!$monSelect) throw new Error('Could not load Select');
+if (!$star) throw new Error('could not load star');
+if (!$filter) throw new Error('could not load filter');
+console.log($star);
 
 const $monChoice = document.querySelector('#monster-line') as HTMLElement;
 if (!$monChoice) throw new Error('could not load a elements');
@@ -92,6 +97,8 @@ async function monsterDetails(event: Event): Promise<void> {
   if (!$monLocations) throw new Error('Could not load locations');
   if (!$monLine) throw new Error('Could not load Line');
   if (!$monSelect) throw new Error('Could not load Select');
+  if (!$star) throw new Error('could not load star');
+  if (!$filter) throw new Error('could not load filter');
   if (!$eventTarget.closest('.monster-card')) return;
   const $monsterCard = $eventTarget.closest('.monster-card');
   if (!$monsterCard) return;
@@ -120,6 +127,8 @@ async function monsterDetails(event: Event): Promise<void> {
     $monLocations.textContent = monsterLoc;
     $monLine.classList.add('hidden');
     $monSelect.classList.remove('hidden');
+    $filter.classList.add('hidden');
+    $star.classList.remove('hidden');
   } catch (error) {}
 }
 
@@ -138,4 +147,6 @@ if (!$monsterPage) throw new Error('Could not load Monster Page');
 $monsterPage.addEventListener('click', function () {
   $monLine.classList.remove('hidden');
   $monSelect.classList.add('hidden');
+  $filter.classList.remove('hidden');
+  $star.classList.add('hidden');
 });
