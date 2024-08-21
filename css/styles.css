@@ -1,19 +1,24 @@
+body {
+  background-color: grey;
+}
+
+.hidden {
+  display: none !important;
+}
+
 header {
   background-color: black;
   font-family: 'Monster Hunter', sans-serif;
 }
 
-.row {
-  color: white;
-}
-
 i {
   margin-top: 20px;
+  padding-right: 25px;
   font-size: 30px;
 }
 
-.container {
-  background-color: gray;
+header i {
+  color: white;
 }
 
 .title-row {
@@ -33,6 +38,7 @@ i {
   text-align: center;
   font-family: 'Monster Hunter', sans-serif;
   padding: 1rem;
+  background-color: grey;
 }
 
 .monster-name h2 {
@@ -48,4 +54,45 @@ i {
 
 .selected {
   color: yellow;
+}
+
+.mon-img {
+  max-height: 450px;
+  max-width: 100%;
+  width: 100%;
+  height: 450px;
+  border: 5px solid black;
+  margin-left: 5px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url('https://www.monsterhunter.com/world/sp/images/ecosystem/img_ecosystem_01_01.jpg');
+}
+
+.monster-details h1 {
+  text-align: center;
+  color: black;
+}
+
+.monster-details h2 {
+  padding-left: 15px;
+}
+
+.monster-details span {
+  color: #74b1c9;
+  font-family: 'Playfair Display', sans-serif;
+  font-size: large;
+}
+
+a {
+  color: #94ca76;
+  font-size: xx-large;
+}
+
+.detail-img {
+  height: 100%;
+  width: 100%;
+}
+
+.monster-card {
+  background-color: grey;
 }

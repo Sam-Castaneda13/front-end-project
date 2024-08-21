@@ -1,3 +1,8 @@
+.container {
+  font-family: 'Monster Hunter', sans-serif;
+  height: 600px;
+}
+
 .header {
   display: flex;
   flex-wrap: nowrap;
@@ -5,9 +10,21 @@
   justify-content: space-between;
 }
 
-.monster-line {
+.row {
   display: flex;
   flex-wrap: wrap;
+}
+
+.row #monster-line {
+  display: contents;
+}
+
+.column-half {
+  flex-basis: 50%;
+}
+
+.padding-left-25 {
+  padding-left: 25px;
 }
 
 @media screen and (width > 374px) {

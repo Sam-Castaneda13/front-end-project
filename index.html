@@ -14,15 +14,20 @@
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
+      rel="stylesheet" />
   </head>
   <body>
     <header class="header justify-between">
       <div class="row">
-        <h1 class="selected">Monsters</h1>
+        <h1 class="selected padding-left-25" id="monsters-tab">Monsters</h1>
       </div>
       <div class="row">
-        <i class="fa-solid fa-star star not-selected"></i>
-        <i class="fa-solid fa-dice dice not-selected"></i>
+        <i class="fa-solid fa-star star not-selected" id="favorite-tab"></i>
+        <i class="fa-solid fa-dice dice not-selected" id="random-tab"></i>
       </div>
     </header>
     <main>
@@ -30,10 +35,37 @@
         <div class="title-row">
           <div class="title">Monsters</div>
         </div>
-        <div class="filter">
+        <div class="filter unhidden">
           <i class="fa-solid fa-filter" id="filter"></i>
         </div>
-        <div class="monster-line"></div>
+        <div class="row">
+          <div class="column-one-third" id="monster-line"></div>
+        </div>
+        <div class="hidden" id="monster-select">
+          <div class="row">
+            <div class="detail-img column-half">
+              <img src="images/renders/Pink-Rathian.webp" class="mon-img" />
+            </div>
+
+            <div class="monster-details column-half">
+              <h1 class="mon-name">Pink-Rathian</h1>
+              <h2 class="monster-descrip">
+                Monster Description:
+                <span class="mon-descrip-in"></span>
+              </h2>
+              <h2 class="monster-type">
+                Monster Type: <span class="mon-type-in"></span>
+              </h2>
+              <h2 class="monster-species">
+                Monster Species:
+                <span class="mon-species-in"></span>
+              </h2>
+              <h2 class="monster-locations">
+                Monster Locations: <span class="mon-locations-in"></span>
+              </h2>
+            </div>
+          </div>
+        </div>
       </div>
     </main>
     <script src="js/data.js"></script>
