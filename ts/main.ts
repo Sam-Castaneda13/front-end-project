@@ -36,21 +36,7 @@ if (!$nameMon) throw new Error('could not load monsters name');
 const $monChoice = document.querySelector('#monster-line') as HTMLElement;
 if (!$monChoice) throw new Error('could not load a elements');
 if (!$monFavCon) throw new Error('could not load a elements');
-async function makeMonsters(): Promise<void> {
-  if (!$monChoice) throw new Error('Could not load row');
-  try {
-    const response = await fetch(`https://mhw-db.com/monsters`);
-    if (!response.ok) {
-      throw new Error('Could not load the response');
-    }
-    const monster = await response.json();
-    for (let i = 0; monster.length + 1; i++) {
-      const newPage = renderMonster(monster[i]);
-      $monChoice.append(newPage);
-    }
-  } catch (error) {}
-}
-makeMonsters();
+
 function renderMonster(object: Monster): HTMLDivElement {
   /* <div class="row">
       <div class="column-one-third">
@@ -210,22 +196,15 @@ function favMon(): void {
     }
   }
   $star?.classList.add('favorite');
-  data.favorite.push({
+  const favMon = {
     name: $nameMon.textContent,
     photoURL: `images/icons/${$nameMon.textContent}.webp`,
     id: Number($nameMon.id),
-  });
+  };
+  data.favorite.push(favMon);
+  $monFavCon?.append(renderMonster(favMon));
   writeData();
   readData();
-
-  loader();
-}
-
-function loader(): void {
-  if (!$monFavCon) throw new Error('Could not load row');
-  const i = data.favorite.length - 1;
-  const $data = renderMonster(data.favorite[i]);
-  $monFavCon.append($data);
 }
 
 if (!$favoriteTab) throw new Error('Could not load Monster Page');
@@ -244,6 +223,21 @@ $favoriteTab.addEventListener('click', function () {
 
 document.addEventListener('DOMContentLoaded', domTree);
 function domTree(): void {
+  async function makeMonsters(): Promise<void> {
+    if (!$monChoice) throw new Error('Could not load row');
+    try {
+      const response = await fetch(`https://mhw-db.com/monsters`);
+      if (!response.ok) {
+        throw new Error('Could not load the response');
+      }
+      const monster = await response.json();
+      for (let i = 0; monster.length + 1; i++) {
+        const newPage = renderMonster(monster[i]);
+        $monChoice.append(newPage);
+      }
+    } catch (error) {}
+  }
+  makeMonsters();
   if (!$monFavCon) throw new Error('Could not load row');
   for (let i = 0; i < data.favorite.length; i++) {
     const $data = renderMonster(data.favorite[i]);
