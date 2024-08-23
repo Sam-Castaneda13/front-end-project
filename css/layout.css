@@ -8,7 +8,7 @@
   flex-wrap: nowrap;
   width: 100%;
   justify-content: space-between;
-  color: white;
+  color: #7965a6;
 }
 
 .row {
@@ -17,6 +17,10 @@
 }
 
 .row #monster-line {
+  display: contents;
+}
+
+.row #monster-favorites {
   display: contents;
 }
 
@@ -40,12 +44,12 @@
   }
 
   .column-one-third {
-    flex-basis: 50%;
+    flex-basis: 40%;
   }
 }
 
 @media screen and (width > 767px) {
   .column-one-third {
-    flex-basis: calc(100% / 3);
+    flex-basis: calc(90% / 3);
   }
 }

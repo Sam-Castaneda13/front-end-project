@@ -1,5 +1,5 @@
 body {
-  background-color: grey;
+  background-color: #0b0303;
 }
 
 .hidden {
@@ -7,7 +7,7 @@ body {
 }
 
 header {
-  background-color: black;
+  background-color: #3d636b;
   font-family: 'Monster Hunter', sans-serif;
 }
 
@@ -18,45 +18,53 @@ i {
 }
 
 header i {
-  color: white;
+  color: #7965a6;
 }
 
 .title-row {
   text-align: center;
   font-family: 'Monster Hunter', sans-serif;
-  color: #94ca76;
+  color: #ede0e0;
 }
 
 .filter {
   text-align: right;
   font-size: xx-large;
   margin-right: 30px;
-  color: black;
+  color: #3d636b;
 }
 
 .star-favorite {
   text-align: right;
   font-size: xx-large;
   margin-right: 30px;
-  color: black;
+  color: #3d636b;
 }
 
 .monster-name {
   text-align: center;
   font-family: 'Monster Hunter', sans-serif;
   padding: 1rem;
-  background-color: grey;
+  background-color: #3d636b;
+  border: 1px solid #7965a6;
+  border-radius: 20px;
 }
 
 .monster-name h2 {
   margin-top: 0;
   font-size: xx-large;
-  color: #94ca76;
+  color: #ede0e0;
 }
 
 .monster-card > img {
   width: 100%;
-  background-color: gray;
+  background-color: #cfacae;
+  border: 3px solid #7965a6;
+  border-radius: 50px;
+}
+
+.monster-card {
+  margin: 10px;
 }
 
 .selected {
@@ -68,7 +76,8 @@ header i {
   max-width: 100%;
   width: 100%;
   height: 450px;
-  border: 5px solid black;
+  border: 3px solid #7965a6;
+  border-radius: 10px;
   margin-left: 5px;
   background-repeat: no-repeat;
   background-size: cover;
@@ -77,22 +86,18 @@ header i {
 
 .monster-details h1 {
   text-align: center;
-  color: black;
+  color: #3d636b;
 }
 
 .monster-details h2 {
   padding-left: 15px;
+  color: #3d636b;
 }
 
 .monster-details span {
-  color: #74b1c9;
+  color: #ede0e0;
   font-family: 'Playfair Display', sans-serif;
   font-size: large;
-}
-
-a {
-  color: #94ca76;
-  font-size: xx-large;
 }
 
 .detail-img {
@@ -100,10 +105,11 @@ a {
   width: 100%;
 }
 
-.monster-card {
-  background-color: grey;
-}
-
 .favorite {
   color: yellow;
+}
+
+a {
+  font-size: xx-large;
+  color: #ede0e0;
 }

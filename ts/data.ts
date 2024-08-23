@@ -4,7 +4,7 @@
 interface Monster {
   name: string;
   photoURL: string;
-  id: number;
+  id: number | string;
 }
 
 interface Data {

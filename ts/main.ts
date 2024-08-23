@@ -1,6 +1,6 @@
 // interface for Monster
 interface Monster {
-  id: number;
+  id: number | string;
   name: string;
   photoURL: string;
 }
@@ -9,8 +9,8 @@ interface HTMLElement extends HTMLAllCollection {
   plzwork: HTMLElement;
 }
 
-const $row = document.querySelector('#monster-line');
-const $row2 = document.querySelector('#monster-favorites');
+const $estrella = document.querySelector('.estrella');
+const $monFavCon = document.querySelector('#monster-favorites');
 const $monDetailImg = document.querySelector('.mon-img');
 const $monTitle = document.querySelector('.title');
 const $favTitle = document.querySelector('.title-fav');
@@ -32,12 +32,12 @@ if (!$monSelect) throw new Error('Could not load Select');
 if (!$star) throw new Error('could not load star');
 if (!$filter) throw new Error('could not load filter');
 if (!$nameMon) throw new Error('could not load monsters name');
-console.log($star);
 
 const $monChoice = document.querySelector('#monster-line') as HTMLElement;
 if (!$monChoice) throw new Error('could not load a elements');
+if (!$monFavCon) throw new Error('could not load a elements');
 async function makeMonsters(): Promise<void> {
-  if (!$row) throw new Error('Could not load row');
+  if (!$monChoice) throw new Error('Could not load row');
   try {
     const response = await fetch(`https://mhw-db.com/monsters`);
     if (!response.ok) {
@@ -46,7 +46,7 @@ async function makeMonsters(): Promise<void> {
     const monster = await response.json();
     for (let i = 0; monster.length + 1; i++) {
       const newPage = renderMonster(monster[i]);
-      $row.append(newPage);
+      $monChoice.append(newPage);
     }
   } catch (error) {}
 }
@@ -91,6 +91,7 @@ function renderMonster(object: Monster): HTMLDivElement {
 }
 
 $monChoice.addEventListener('click', monsterDetails);
+$monFavCon.addEventListener('click', monsterDetails);
 
 async function monsterDetails(event: Event): Promise<void> {
   const $eventTarget = event.target as HTMLElement;
@@ -117,7 +118,6 @@ async function monsterDetails(event: Event): Promise<void> {
     const $monDet = await response.json();
     $nameMon.setAttribute('id', monsterId);
     const img = imgChanger($monDet);
-    console.log(`images/renders/${img}.webp`);
     $monDetailImg.setAttribute('src', `images/renders/${img}.webp`);
     $nameMon.textContent = $monDet.name;
     $monDescription.textContent = $monDet.description;
@@ -137,6 +137,7 @@ async function monsterDetails(event: Event): Promise<void> {
     $monSelect.classList.remove('hidden');
     $filter.classList.add('hidden');
     $star.classList.remove('hidden');
+    $monFav?.classList.add('hidden');
     for (let i = 0; i < data.favorite.length; i++) {
       if (data.favorite[i].id === Number(monsterId)) {
         $star?.classList.add('favorite');
@@ -170,34 +171,61 @@ $monsterPage.addEventListener('click', function () {
   $star?.classList.remove('favorite');
 });
 
-$star.addEventListener('click', favMon);
+if (!$estrella) throw new Error('could not load favorite star click');
+$estrella.addEventListener('click', function () {
+  if ($star.classList[1] === 'favorite') {
+    removeFav();
+  } else if ($star.classList[1] !== 'favorite') {
+    favMon();
+  }
+});
 
-function favMon(): void {
-  const $idk = document.querySelectorAll('.monster-name');
+function removeFav(): void {
+  const $card = document.querySelector('.monster-card');
   if (!$nameMon) throw new Error('Could not load name');
+  if (!$card) throw new Error('Could not load name');
+  if (!$monFavCon?.firstChild)
+    throw new Error('could not load the first child element');
   if (!$nameMon.textContent) throw new Error('Could not load name');
-  for (let i = 0; i < $idk.length; i++) {
-    if ($nameMon?.textContent === $idk[i].textContent) {
-      $star?.classList.add('favorite');
-      if (data.favorite[i].name !== $nameMon.textContent) {
-        data.favorite.push({
-          name: $nameMon.textContent,
-          photoURL: `images/icons/${$nameMon.textContent}.webp`,
-          id: Number($nameMon.id),
-        });
-        writeData();
-        readData();
-        loader();
-      }
+  $star?.classList.remove('favorite');
+  for (let i = 0; i < data.favorite.length; i++) {
+    if (Number($nameMon.id) === data.favorite[i].id) {
+      data.favorite.splice(i, 1);
     }
   }
+  writeData();
+  if (!$monFav) throw new Error('could not load monster fav page');
+  const $cardToRemove = $monFav.querySelector(
+    `[data-monster-id='${Number($nameMon.id)}']`,
+  );
+  $cardToRemove?.remove();
+}
+
+function favMon(): void {
+  if (!$nameMon) throw new Error('Could not load name');
+  if (!$nameMon.textContent) throw new Error('Could not load name');
+  for (let i = 0; i < data.favorite.length; i++) {
+    if ($nameMon.textContent === data.favorite[i].name) {
+      return;
+    }
+  }
+  $star?.classList.add('favorite');
+  data.favorite.push({
+    name: $nameMon.textContent,
+    photoURL: `images/icons/${$nameMon.textContent}.webp`,
+    id: Number($nameMon.id),
+  });
+  writeData();
+  readData();
+
+  loader();
 }
 
 function loader(): void {
-  if (!$row2) throw new Error('Could not load row');
+  if (!$monFavCon) throw new Error('Could not load row');
   const i = data.favorite.length - 1;
   const $data = renderMonster(data.favorite[i]);
-  $row2.append($data);
+  $monFavCon.append($data);
 }
 
 if (!$favoriteTab) throw new Error('Could not load Monster Page');
@@ -216,9 +244,9 @@ $favoriteTab.addEventListener('click', function () {
 
 document.addEventListener('DOMContentLoaded', domTree);
 function domTree(): void {
-  if (!$row2) throw new Error('Could not load row');
+  if (!$monFavCon) throw new Error('Could not load row');
   for (let i = 0; i < data.favorite.length; i++) {
     const $data = renderMonster(data.favorite[i]);
-    $row2.append($data);
+    $monFavCon.append($data);
   }
 }
