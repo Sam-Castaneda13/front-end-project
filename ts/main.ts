@@ -1,18 +1,19 @@
 // interface for Monster
 interface Monster {
-  id: number;
+  id: number | string;
   name: string;
-  type: string;
-  description: string;
-  locations: [];
+  photoURL: string;
 }
 
 interface HTMLElement extends HTMLAllCollection {
   plzwork: HTMLElement;
 }
 
-const $row = document.querySelector('#monster-line');
+const $estrella = document.querySelector('.estrella');
+const $monFavCon = document.querySelector('#monster-favorites');
 const $monDetailImg = document.querySelector('.mon-img');
+const $monTitle = document.querySelector('.title');
+const $favTitle = document.querySelector('.title-fav');
 const $nameMon = document.querySelector('.mon-name');
 const $monDescription = document.querySelector('.mon-descrip-in');
 const $monType = document.querySelector('.mon-type-in');
@@ -20,19 +21,23 @@ const $monSpecies = document.querySelector('.mon-species-in');
 const $monLocations = document.querySelector('.mon-locations-in');
 const $monLine = document.querySelector('#monster-line');
 const $monSelect = document.querySelector('#monster-select');
+const $monFav = document.querySelector('.favorite-page');
 const $monsterPage = document.querySelector('#monsters-tab');
 const $filter = document.querySelector('.filter');
 const $star = document.querySelector('.star-favorite');
+const $favoriteTab = document.querySelector('#favorite-tab');
 if (!$monLine) throw new Error('Could not load Line');
+if (!$monFav) throw new Error('Could not load Favorite');
 if (!$monSelect) throw new Error('Could not load Select');
 if (!$star) throw new Error('could not load star');
 if (!$filter) throw new Error('could not load filter');
-console.log($star);
+if (!$nameMon) throw new Error('could not load monsters name');
 
 const $monChoice = document.querySelector('#monster-line') as HTMLElement;
 if (!$monChoice) throw new Error('could not load a elements');
+if (!$monFavCon) throw new Error('could not load a elements');
 async function makeMonsters(): Promise<void> {
-  if (!$row) throw new Error('Could not load row');
+  if (!$monChoice) throw new Error('Could not load row');
   try {
     const response = await fetch(`https://mhw-db.com/monsters`);
     if (!response.ok) {
@@ -41,11 +46,10 @@ async function makeMonsters(): Promise<void> {
     const monster = await response.json();
     for (let i = 0; monster.length + 1; i++) {
       const newPage = renderMonster(monster[i]);
-      $row.append(newPage);
+      $monChoice.append(newPage);
     }
   } catch (error) {}
 }
-makeMonsters();
 function renderMonster(object: Monster): HTMLDivElement {
   /* <div class="row">
       <div class="column-one-third">
@@ -86,6 +90,7 @@ function renderMonster(object: Monster): HTMLDivElement {
 }
 
 $monChoice.addEventListener('click', monsterDetails);
+$monFavCon.addEventListener('click', monsterDetails);
 
 async function monsterDetails(event: Event): Promise<void> {
   const $eventTarget = event.target as HTMLElement;
@@ -103,12 +108,14 @@ async function monsterDetails(event: Event): Promise<void> {
   const $monsterCard = $eventTarget.closest('.monster-card');
   if (!$monsterCard) return;
   const monsterId = $monsterCard.getAttribute('data-monster-id');
+  if (!monsterId) return;
   try {
     const response = await fetch(`https://mhw-db.com/monsters/${monsterId}`);
     if (!response.ok) {
       throw new Error('Could not load the response');
     }
     const $monDet = await response.json();
+    $nameMon.setAttribute('id', monsterId);
     const img = imgChanger($monDet);
     $monDetailImg.setAttribute('src', `images/renders/${img}.webp`);
     $nameMon.textContent = $monDet.name;
@@ -129,6 +136,12 @@ async function monsterDetails(event: Event): Promise<void> {
     $monSelect.classList.remove('hidden');
     $filter.classList.add('hidden');
     $star.classList.remove('hidden');
+    $monFav?.classList.add('hidden');
+    for (let i = 0; i < data.favorite.length; i++) {
+      if (data.favorite[i].id === Number(monsterId)) {
+        $star?.classList.add('favorite');
+      }
+    }
   } catch (error) {}
 }
 
@@ -147,6 +160,85 @@ if (!$monsterPage) throw new Error('Could not load Monster Page');
 $monsterPage.addEventListener('click', function () {
   $monLine.classList.remove('hidden');
   $monSelect.classList.add('hidden');
+  $monFav.classList.add('hidden');
+  $favoriteTab?.classList.remove('selected');
+  $monsterPage.classList.add('selected');
+  $favTitle?.classList.add('hidden');
+  $monTitle?.classList.remove('hidden');
   $filter.classList.remove('hidden');
   $star.classList.add('hidden');
+  $star?.classList.remove('favorite');
 });
+
+if (!$estrella) throw new Error('could not load favorite star click');
+$estrella.addEventListener('click', function () {
+  if ($star.classList[1] === 'favorite') {
+    removeFav();
+  } else if ($star.classList[1] !== 'favorite') {
+    favMon();
+  }
+});
+
+function removeFav(): void {
+  const $card = document.querySelector('.monster-card');
+  if (!$nameMon) throw new Error('Could not load name');
+  if (!$card) throw new Error('Could not load name');
+  if (!$monFavCon?.firstChild)
+    throw new Error('could not load the first child element');
+  if (!$nameMon.textContent) throw new Error('Could not load name');
+  $star?.classList.remove('favorite');
+  for (let i = 0; i < data.favorite.length; i++) {
+    if (Number($nameMon.id) === data.favorite[i].id) {
+      data.favorite.splice(i, 1);
+    }
+  }
+  writeData();
+  if (!$monFav) throw new Error('could not load monster fav page');
+  const $cardToRemove = $monFav.querySelector(
+    `[data-monster-id='${Number($nameMon.id)}']`,
+  );
+  $cardToRemove?.remove();
+}
+
+function favMon(): void {
+  if (!$nameMon) throw new Error('Could not load name');
+  if (!$nameMon.textContent) throw new Error('Could not load name');
+  for (let i = 0; i < data.favorite.length; i++) {
+    if ($nameMon.textContent === data.favorite[i].name) {
+      return;
+    }
+  }
+  $star?.classList.add('favorite');
+  const favMon = {
+    name: $nameMon.textContent,
+    photoURL: `images/icons/${$nameMon.textContent}.webp`,
+    id: Number($nameMon.id),
+  };
+  data.favorite.push(favMon);
+  $monFavCon?.append(renderMonster(favMon));
+  writeData();
+}
+
+if (!$favoriteTab) throw new Error('Could not load Monster Page');
+$favoriteTab.addEventListener('click', function () {
+  $monLine.classList.add('hidden');
+  $monSelect.classList.add('hidden');
+  $monFav.classList.remove('hidden');
+  $favoriteTab?.classList.add('selected');
+  $monsterPage.classList.remove('selected');
+  $favTitle?.classList.remove('hidden');
+  $monTitle?.classList.add('hidden');
+  $filter.classList.remove('hidden');
+  $star.classList.add('hidden');
+  $star?.classList.remove('favorite');
+});
+
+document.addEventListener('DOMContentLoaded', domTree);
+function domTree(): void {
+  makeMonsters();
+  if (!$monFavCon) throw new Error('Could not load row');
+  for (let i = 0; i < data.favorite.length; i++) {
+    const $data = renderMonster(data.favorite[i]);
+    $monFavCon.append($data);
+  }
+}
