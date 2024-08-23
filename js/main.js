@@ -25,6 +25,20 @@ if (!$nameMon) throw new Error('could not load monsters name');
 const $monChoice = document.querySelector('#monster-line');
 if (!$monChoice) throw new Error('could not load a elements');
 if (!$monFavCon) throw new Error('could not load a elements');
+async function makeMonsters() {
+  if (!$monChoice) throw new Error('Could not load row');
+  try {
+    const response = await fetch(`https://mhw-db.com/monsters`);
+    if (!response.ok) {
+      throw new Error('Could not load the response');
+    }
+    const monster = await response.json();
+    for (let i = 0; monster.length + 1; i++) {
+      const newPage = renderMonster(monster[i]);
+      $monChoice.append(newPage);
+    }
+  } catch (error) {}
+}
 function renderMonster(object) {
   /* <div class="row">
         <div class="column-one-third">
@@ -179,7 +193,6 @@ function favMon() {
   data.favorite.push(favMon);
   $monFavCon?.append(renderMonster(favMon));
   writeData();
-  readData();
 }
 if (!$favoriteTab) throw new Error('Could not load Monster Page');
 $favoriteTab.addEventListener('click', function () {
@@ -196,20 +209,6 @@ $favoriteTab.addEventListener('click', function () {
 });
 document.addEventListener('DOMContentLoaded', domTree);
 function domTree() {
-  async function makeMonsters() {
-    if (!$monChoice) throw new Error('Could not load row');
-    try {
-      const response = await fetch(`https://mhw-db.com/monsters`);
-      if (!response.ok) {
-        throw new Error('Could not load the response');
-      }
-      const monster = await response.json();
-      for (let i = 0; monster.length + 1; i++) {
-        const newPage = renderMonster(monster[i]);
-        $monChoice.append(newPage);
-      }
-    } catch (error) {}
-  }
   makeMonsters();
   if (!$monFavCon) throw new Error('Could not load row');
   for (let i = 0; i < data.favorite.length; i++) {
